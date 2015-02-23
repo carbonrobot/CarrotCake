@@ -59,7 +59,7 @@
         /// <returns>T.</returns>
         public T Find<T>(int id, params Expression<Func<T, object>>[] includes) where T : class, IEntity
         {
-            return this.Set<T>().Include(includes).Find(id);
+            return this.Set<T>().IncludeMany(includes).SingleOrDefault(x => x.Id == id);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@
         /// <returns>T.</returns>
         public T Get<T>(int id, params Expression<Func<T, object>>[] includes) where T : class, IEntity
         {
-            return this.Set<T>().Include(includes).Find(id);
+            return this.Set<T>().IncludeMany(includes).Single(x => x.Id == id);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@
         /// <returns>IList&lt;T&gt;.</returns>
         public IList<T> List<T>(params Expression<Func<T, object>>[] includes) where T : class, IEntity
         {
-            return this.Set<T>().Include(includes).ToList();
+            return this.Set<T>().IncludeMany(includes).ToList();
         }
 
         /// <summary>
@@ -108,7 +108,7 @@
         /// <returns>IEnumerable&lt;T&gt;.</returns>
         public IList<T> Where<T>(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes) where T : class, IEntity
         {
-            return this.Set<T>().Include(includes).Where(predicate).ToList();
+            return this.Set<T>().IncludeMany(includes).Where(predicate).ToList();
         }
     }
 }

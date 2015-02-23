@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Linq;
     using System.Linq.Expressions;
     using Domain;
 
@@ -27,7 +28,7 @@
         /// <param name="set">The set.</param>
         /// <param name="includes">The includes.</param>
         /// <returns>DbSet&lt;T&gt;.</returns>
-        public static DbSet<T> Include<T>(this DbSet<T> set, params Expression<Func<T, object>>[] includes) where T : class, IEntity
+        public static IQueryable<T> IncludeMany<T>(this IQueryable<T> set, params Expression<Func<T, object>>[] includes) where T : class, IEntity
         {
             if (includes != null)
             {
